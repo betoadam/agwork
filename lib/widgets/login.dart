@@ -83,6 +83,9 @@ class _MyHomePageState extends State<MyHomePage> {
       onSaved: (String val) {
         senha = val;
       },
+      onChanged: (String vale) {
+        senha = vale;
+      },
       obscureText: true,
       style: style,
       decoration: InputDecoration(
@@ -95,8 +98,8 @@ class _MyHomePageState extends State<MyHomePage> {
 final repasswordField = TextFormField(
       keyboardType: TextInputType.visiblePassword,
       maxLength: 8,
-      validator: _validarSenha,
-      onSaved: (String val) {
+      validator: _validarContraSenha,
+      onChanged: (String val) {
         resenha = val;
       },
       obscureText: true,
@@ -192,9 +195,15 @@ final repasswordField = TextFormField(
     return null;
   }
 
+  String _validarContraSenha(String value) {
+    if (value != senha) {
+      return "As senhas estão diferentes";
+    }
+    return null;
+  }
+
   _sendForm() {
     if (_key.currentState.validate()) {
-      if(resenha==senha){
         // Sem erros na validação
         _key.currentState.save();
         print("Email $email");
@@ -204,7 +213,7 @@ final repasswordField = TextFormField(
           context,
           MaterialPageRoute(builder: (context) => MyApp()),
         );
-      }
+      
     } else {
       // erro de validação
       setState(() {
