@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:agrowork_fl/widgets/login.dart';
+import 'package:agrowork_fl/widgets/routes/mini_login.dart';
 
 void main() => runApp(MyApp());
 
@@ -105,10 +106,21 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
-              onPressed: () {},
+              onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MiniLogin()),
+            );
+          },
             ),
             const SizedBox(height: 20),
             RaisedButton(
+              onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MiniLogin()),
+            );
+          },
               color: Colors.greenAccent,
               padding: EdgeInsets.all(2.0),
               child: Column(
@@ -136,7 +148,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
-              onPressed: () {},
             ),
           ],
         ),

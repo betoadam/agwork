@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:agrowork_fl/main.dart';
 
-void main() => runApp(Login());
+void main() => runApp(MiniLogin());
 
-class Login extends StatelessWidget {
+class MiniLogin extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Login',
+      title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
   TextStyle style = TextStyle(fontFamily: 'Comfortaa', fontSize: 16.0);
   GlobalKey<FormState> _key = new GlobalKey();
   bool _validate = false;
-  String email, senha, resenha;
+  String email, senha;
 
   @override
   Widget build(BuildContext context) {
@@ -92,22 +92,6 @@ class _MyHomePageState extends State<MyHomePage> {
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
-final repasswordField = TextFormField(
-      keyboardType: TextInputType.visiblePassword,
-      maxLength: 8,
-      validator: _validarSenha,
-      onSaved: (String val) {
-        resenha = val;
-      },
-      obscureText: true,
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "RePassword",
-          border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
-
     final loginButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
@@ -116,7 +100,7 @@ final repasswordField = TextFormField(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: _sendForm,
-        child: Text("Criar Usuário",
+        child: Text("Login",
             textAlign: TextAlign.center,
             style: style.copyWith(
                 color: Colors.white, fontWeight: FontWeight.bold)),
@@ -129,7 +113,7 @@ final repasswordField = TextFormField(
           child: new Form(
             key: _key,
             autovalidate: _validate,
-            child: _formUI(emailField, passwordField, repasswordField, loginButon),
+            child: _formUI(emailField, passwordField, loginButon),
           ),
           color: Colors.white,
         ),
@@ -137,7 +121,7 @@ final repasswordField = TextFormField(
     ));
   }
 
-  Widget _formUI(emailField, passwordField, repasswordField, loginButon) {
+  Widget _formUI(emailField, passwordField, loginButon) {
     return new Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -153,8 +137,6 @@ final repasswordField = TextFormField(
         emailField,
         SizedBox(height: 25.0),
         passwordField,
-        SizedBox(height: 25.0),
-        repasswordField,
         SizedBox(
           height: 35.0,
         ),
@@ -194,17 +176,14 @@ final repasswordField = TextFormField(
 
   _sendForm() {
     if (_key.currentState.validate()) {
-      if(resenha==senha){
-        // Sem erros na validação
-        _key.currentState.save();
-        print("Email $email");
-        print("Senha $senha");
-        print("ReSenha $resenha");
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MyApp()),
-        );
-      }
+      // Sem erros na validação
+      _key.currentState.save();
+      print("Email $email");
+      print("Senha $senha");
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MyApp()),
+      );
     } else {
       // erro de validação
       setState(() {
